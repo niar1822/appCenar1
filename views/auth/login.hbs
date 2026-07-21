@@ -1,0 +1,41 @@
+<div class="row justify-content-center">
+    <div class="col-lg-5">
+        <div class="card shadow-sm border-0">
+            <div class="card-body p-4">
+                <h3 class="mb-3">Iniciar sesion</h3>
+
+                {{#if error}}
+                <div class="alert alert-danger">{{error}}</div>
+                {{/if}}
+
+                {{#if activated}}
+                <div class="alert alert-success">Tu cuenta fue activada correctamente.</div>
+                {{/if}}
+
+                {{#if reset}}
+                <div class="alert alert-success">Tu contrasena fue actualizada correctamente.</div>
+                {{/if}}
+
+                <form method="POST" action="/login">
+                    <div class="mb-3">
+                        <label class="form-label">Correo o usuario</label>
+                        <input type="text" name="username" class="form-control" required>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Contrasena</label>
+                        <input type="password" name="password" class="form-control" required>
+                    </div>
+
+                    <button class="btn btn-success w-100">Entrar</button>
+                </form>
+
+                <div class="d-grid gap-2 mt-3">
+                    <a href="/register?role=cliente" class="btn btn-outline-primary">Registrarme como cliente o delivery</a>
+                    <a href="/register?role=comercio" class="btn btn-outline-dark">Registrar comercio</a>
+                    <a href="/forgot" class="btn btn-link">Restablecer contrasena</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

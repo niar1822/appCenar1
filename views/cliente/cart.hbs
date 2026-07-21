@@ -1,0 +1,34 @@
+<h2 class="mb-4">Carrito</h2>
+
+{{#each comercios}}
+<div class="card shadow-sm border-0 mb-3">
+    <div class="card-body">
+        <h5>{{this.comercioNombre}}</h5>
+        {{#each this.productos}}
+        <div class="d-flex justify-content-between align-items-center py-2 border-bottom">
+            <span>{{this.nombre}}</span>
+            <div class="d-flex gap-2 align-items-center">
+                <span>RD$ {{formatCurrency this.precio}}</span>
+                <form method="POST" action="/cliente/cart/remove/{{../comercioId}}/{{this.productoId}}">
+                    <button class="btn btn-sm btn-outline-danger">Eliminar</button>
+                </form>
+            </div>
+        </div>
+        {{/each}}
+        <div class="d-flex justify-content-between mt-3">
+            <strong>Total</strong>
+            <strong>RD$ {{formatCurrency this.total}}</strong>
+        </div>
+        <a href="/cliente/checkout/{{this.comercioId}}" class="btn btn-success mt-3">Continuar con este comercio</a>
+    </div>
+</div>
+{{else}}
+<div class="alert alert-info">Tu carrito esta vacio.</div>
+{{/each}}
+
+<div class="d-flex justify-content-between align-items-center">
+    <a href="/cliente" class="btn btn-outline-secondary">Seguir comprando</a>
+    <form method="POST" action="/cliente/cart/clear">
+        <button class="btn btn-outline-danger">Vaciar carrito</button>
+    </form>
+</div>

@@ -1,0 +1,40 @@
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h2 class="mb-0">Listado de {{role}}</h2>
+    <div class="btn-group">
+        <a href="/admin/users/cliente" class="btn btn-outline-dark">Clientes</a>
+        <a href="/admin/users/delivery" class="btn btn-outline-dark">Delivery</a>
+        <a href="/admin/users/comercio" class="btn btn-outline-dark">Comercios</a>
+    </div>
+</div>
+
+{{#each users}}
+<div class="card shadow-sm border-0 mb-3">
+    <div class="card-body">
+        <div class="d-flex justify-content-between align-items-start">
+            <div>
+                {{#if (eq ../role "comercio")}}
+                {{#if this.foto}}
+                <img src="{{this.foto}}" alt="{{this.nombre}}" width="72" height="72" class="rounded object-fit-cover mb-2">
+                {{/if}}
+                {{/if}}
+                <h5 class="mb-1">{{this.nombre}} {{this.apellido}}</h5>
+                <p class="mb-1"><strong>Correo:</strong> {{this.email}}</p>
+                <p class="mb-1"><strong>Telefono:</strong> {{this.telefono}}</p>
+                <p class="mb-1"><strong>Pedidos:</strong> {{this.ordersCount}}</p>
+                {{#if (eq ../role "comercio")}}
+                <p class="mb-1"><strong>Horario:</strong> {{this.horarioApertura}} - {{this.horarioCierre}}</p>
+                <p class="mb-0"><strong>Tipo:</strong> {{this.tipoComercio.nombre}}</p>
+                {{/if}}
+            </div>
+
+            <form method="POST" action="/admin/users/toggle/{{this._id}}">
+                <button class="btn {{#if this.activo}}btn-outline-danger{{else}}btn-success{{/if}}">
+                    {{#if this.activo}}Inactivar{{else}}Activar{{/if}}
+                </button>
+            </form>
+        </div>
+    </div>
+</div>
+{{else}}
+<div class="alert alert-info">No hay usuarios para este rol.</div>
+{{/each}}

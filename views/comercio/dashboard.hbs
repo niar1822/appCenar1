@@ -1,0 +1,55 @@
+<h2 class="mb-4">Panel del comercio</h2>
+
+<div class="row g-4 mb-4">
+    <div class="col-md-4">
+        <div class="card shadow-sm border-0">
+            <div class="card-body">
+                <p class="text-muted mb-1">Productos</p>
+                <h3>{{productsCount}}</h3>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card shadow-sm border-0">
+            <div class="card-body">
+                <p class="text-muted mb-1">Categorias</p>
+                <h3>{{categoriesCount}}</h3>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card shadow-sm border-0">
+            <div class="card-body">
+                <p class="text-muted mb-1">Pedidos activos</p>
+                <h3>{{activeOrders}}</h3>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="d-flex gap-2">
+    <a href="/comercio/categories" class="btn btn-outline-dark">Categorias</a>
+    <a href="/comercio/products" class="btn btn-success">Productos</a>
+    <a href="/comercio/orders" class="btn btn-primary">Pedidos</a>
+</div>
+
+<h3 class="mt-4 mb-3">Pedidos recientes</h3>
+
+{{#each orders}}
+<div class="card shadow-sm border-0 mb-3">
+    <div class="card-body">
+        <div class="d-flex justify-content-between align-items-start">
+            <div>
+                <h5 class="mb-1">{{this.numeroPedido}}</h5>
+                <p class="mb-1"><strong>Cliente:</strong> {{this.cliente.nombre}} {{this.cliente.apellido}}</p>
+                <p class="mb-1"><strong>Estado:</strong> {{this.estado}}</p>
+                <p class="mb-1"><strong>Total:</strong> RD$ {{formatCurrency this.total}}</p>
+                <p class="mb-0"><strong>Direccion:</strong> {{this.direccionEntrega.direccion}}</p>
+            </div>
+            <a href="/comercio/orders/{{this._id}}" class="btn btn-outline-dark">Ver detalle</a>
+        </div>
+    </div>
+</div>
+{{else}}
+<div class="alert alert-info mt-3">No hay pedidos registrados.</div>
+{{/each}}

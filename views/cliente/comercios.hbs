@@ -1,0 +1,48 @@
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <div>
+        <h2 class="mb-1">{{tipo.nombre}}</h2>
+        <p class="text-muted mb-0">{{total}} comercios encontrados</p>
+    </div>
+    <a href="/cliente" class="btn btn-outline-secondary">Volver</a>
+</div>
+
+<form method="GET" class="row g-2 mb-4">
+    <div class="col-md-8">
+        <input type="text" name="search" class="form-control" placeholder="Buscar por nombre" value="{{search}}">
+    </div>
+    <div class="col-md-4">
+        <button class="btn btn-dark w-100">Buscar</button>
+    </div>
+</form>
+
+<div class="row g-4">
+    {{#each comercios}}
+    <div class="col-md-6 col-xl-4">
+        <div class="card h-100 shadow-sm border-0">
+            {{#if this.foto}}
+            <img src="{{this.foto}}" class="card-img-top" alt="{{this.nombre}}" style="height: 220px; object-fit: cover;">
+            {{/if}}
+            <div class="card-body">
+                <div class="d-flex justify-content-between align-items-start">
+                    <div>
+                        <h5 class="card-title mb-1">{{this.nombre}}</h5>
+                        <p class="text-muted small mb-2">{{this.email}}</p>
+                    </div>
+                    <form method="POST" action="/cliente/favorites/{{this._id}}">
+                        <button class="btn btn-sm {{#if this.isFavorite}}btn-danger{{else}}btn-outline-danger{{/if}}">
+                            <i class="bi bi-heart{{#if this.isFavorite}}-fill{{/if}}"></i>
+                        </button>
+                    </form>
+                </div>
+
+                <p class="mb-1"><strong>Horario:</strong> {{this.horarioApertura}} - {{this.horarioCierre}}</p>
+                <a href="/cliente/menu/{{this._id}}" class="btn btn-success mt-3">Ver catalogo</a>
+            </div>
+        </div>
+    </div>
+    {{else}}
+    <div class="col-12">
+        <div class="alert alert-warning">No hay comercios para este filtro.</div>
+    </div>
+    {{/each}}
+</div>

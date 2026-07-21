@@ -1,0 +1,49 @@
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <div>
+        <h2 class="mb-1">Detalle del pedido</h2>
+        <p class="text-muted mb-0">{{order.numeroPedido}}</p>
+    </div>
+    <a href="/delivery" class="btn btn-outline-secondary">Volver</a>
+</div>
+
+<div class="card shadow-sm border-0">
+    <div class="card-body">
+        <div class="row g-4">
+            <div class="col-lg-5">
+                <h5>{{order.comercio.nombre}}</h5>
+                <p class="mb-1"><strong>Estado:</strong> {{order.estado}}</p>
+                <p class="mb-1"><strong>Fecha:</strong> {{order.createdAt}}</p>
+                <p class="mb-3"><strong>Productos:</strong> {{productosCount}}</p>
+
+                {{#if (eq order.estado "en proceso")}}
+                <p class="mb-0"><strong>Entrega:</strong> {{order.direccionEntrega.alias}} - {{order.direccionEntrega.direccion}}</p>
+                {{#if order.direccionEntrega.referencia}}
+                <p class="text-muted mt-1 mb-3">{{order.direccionEntrega.referencia}}</p>
+                {{/if}}
+                {{/if}}
+
+                {{#if (eq order.estado "en proceso")}}
+                <form method="POST" action="/delivery/orders/complete/{{order._id}}">
+                    <button class="btn btn-success w-100">Completar pedido</button>
+                </form>
+                {{/if}}
+            </div>
+
+            <div class="col-lg-7">
+                <h5 class="mb-3">Productos</h5>
+                {{#each order.productos}}
+                <div class="d-flex align-items-center gap-3 border rounded p-3 mb-3">
+                    {{#if this.imagen}}
+                    <img src="{{this.imagen}}" alt="{{this.nombre}}" style="width:72px;height:72px;object-fit:cover;border-radius:12px;">
+                    {{/if}}
+                    <div class="flex-grow-1">
+                        <h6 class="mb-1">{{this.nombre}}</h6>
+                        <p class="mb-1"><strong>Cantidad:</strong> {{this.cantidad}}</p>
+                        <p class="mb-0 text-muted">RD$ {{formatCurrency this.precio}}</p>
+                    </div>
+                </div>
+                {{/each}}
+            </div>
+        </div>
+    </div>
+</div>

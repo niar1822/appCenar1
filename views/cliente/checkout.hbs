@@ -1,0 +1,66 @@
+<div class="row g-4">
+    <div class="col-lg-7">
+        <div class="card shadow-sm border-0">
+            <div class="card-body">
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <h3 class="mb-0">Selecciona una direccion</h3>
+                    <a href="/cliente/addresses" class="btn btn-outline-secondary btn-sm">Gestionar direcciones</a>
+                </div>
+
+                {{#if direcciones.length}}
+                <form method="POST" action="/cliente/checkout/{{comercioId}}">
+                    {{#each direcciones}}
+                    <label class="border rounded p-3 d-block mb-3">
+                        <input type="radio" name="addressId" value="{{this._id}}" required>
+                        <span class="fw-semibold ms-2">{{this.alias}}</span>
+                        <div class="ms-4 text-muted">{{this.direccion}}</div>
+                        {{#if this.referencia}}
+                        <div class="ms-4 small text-muted">{{this.referencia}}</div>
+                        {{/if}}
+                    </label>
+                    {{/each}}
+
+                    <div class="d-flex gap-2">
+                        <a href="/cliente/menu/{{comercioId}}" class="btn btn-outline-secondary">Volver</a>
+                        <button class="btn btn-success">Pedir</button>
+                    </div>
+                </form>
+                {{else}}
+                <div class="alert alert-warning">Necesitas crear al menos una direccion para continuar.</div>
+                {{/if}}
+            </div>
+        </div>
+    </div>
+
+    <div class="col-lg-5">
+        <div class="card shadow-sm border-0">
+            <div class="card-body">
+                <h4 class="mb-3">{{comercio.nombre}}</h4>
+
+                {{#if comercio.foto}}
+                <img src="{{comercio.foto}}" alt="{{comercio.nombre}}" class="img-fluid rounded mb-3">
+                {{/if}}
+
+                {{#each productos}}
+                <div class="d-flex justify-content-between py-2 border-bottom">
+                    <span>{{this.nombre}}</span>
+                    <span>RD$ {{formatCurrency this.precio}}</span>
+                </div>
+                {{/each}}
+
+                <div class="d-flex justify-content-between mt-3">
+                    <span>Subtotal</span>
+                    <strong>RD$ {{formatCurrency subtotal}}</strong>
+                </div>
+                <div class="d-flex justify-content-between">
+                    <span>ITBIS ({{itbisRate}}%)</span>
+                    <strong>RD$ {{formatCurrency itbisAmount}}</strong>
+                </div>
+                <div class="d-flex justify-content-between mt-2">
+                    <span>Total</span>
+                    <strong>RD$ {{formatCurrency total}}</strong>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

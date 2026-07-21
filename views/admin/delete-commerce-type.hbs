@@ -1,0 +1,19 @@
+<div class="row justify-content-center">
+    <div class="col-lg-6">
+        <div class="card shadow-sm border-0">
+            <div class="card-body text-center">
+                <h2 class="mb-3">Eliminar tipo de comercio</h2>
+                <p class="mb-2">Estas seguro que deseas eliminar este tipo de comercio y todos los comercios asociados?</p>
+                <p class="text-muted mb-1">{{type.nombre}}</p>
+                <p class="text-muted mb-4">Comercios asociados: {{comerciosCount}}</p>
+
+                <div class="d-flex justify-content-center gap-2">
+                    <a href="/admin/commerce-types" class="btn btn-outline-secondary">Cancelar</a>
+                    <form method="POST" action="/admin/commerce-types/delete/{{type._id}}">
+                        <button class="btn btn-danger">Aceptar</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

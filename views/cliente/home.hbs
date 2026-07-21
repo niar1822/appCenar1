@@ -1,0 +1,64 @@
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <div>
+        <h2 class="mb-1">Tipos de comercio</h2>
+        <p class="text-muted mb-0">Selecciona una categoria para ver los comercios disponibles.</p>
+    </div>
+    <div class="d-flex gap-2">
+        <a href="/cliente/comercios/todos" class="btn btn-outline-dark">Ver todos</a>
+        <a href="/cliente/favorites" class="btn btn-outline-danger">Mis favoritos</a>
+    </div>
+</div>
+
+<div class="row g-4">
+    {{#each tipos}}
+    <div class="col-md-4 col-xl-3">
+        <a href="/cliente/comercios/{{this._id}}" class="text-decoration-none text-dark">
+            <div class="card h-100 shadow-sm border-0">
+                {{#if this.icono}}
+                <img src="{{this.icono}}" class="card-img-top" alt="{{this.nombre}}" style="height: 180px; object-fit: cover;">
+                {{/if}}
+                <div class="card-body">
+                    <h5 class="card-title">{{this.nombre}}</h5>
+                    <p class="card-text text-muted">{{this.descripcion}}</p>
+                    <span class="badge text-bg-dark">{{this.cantidadComercios}} comercios</span>
+                </div>
+            </div>
+        </a>
+    </div>
+    {{else}}
+    <div class="col-12">
+        <div class="alert alert-info">Aun no hay tipos de comercio registrados.</div>
+    </div>
+    {{/each}}
+</div>
+
+<div class="mt-5">
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <div>
+            <h3 class="mb-1">Comercios activos</h3>
+            <p class="text-muted mb-0">{{totalComercios}} comercios disponibles</p>
+        </div>
+    </div>
+
+    <div class="row g-4">
+        {{#each comerciosActivos}}
+        <div class="col-md-6 col-xl-4">
+            <div class="card h-100 shadow-sm border-0">
+                {{#if this.foto}}
+                <img src="{{this.foto}}" class="card-img-top" alt="{{this.nombre}}" style="height: 220px; object-fit: cover;">
+                {{/if}}
+                <div class="card-body">
+                    <h5 class="card-title">{{this.nombre}}</h5>
+                    <p class="text-muted mb-1">{{this.email}}</p>
+                    <p class="mb-3"><strong>Horario:</strong> {{this.horarioApertura}} - {{this.horarioCierre}}</p>
+                    <a href="/cliente/menu/{{this._id}}" class="btn btn-success">Ver catalogo</a>
+                </div>
+            </div>
+        </div>
+        {{else}}
+        <div class="col-12">
+            <div class="alert alert-warning mb-0">No hay comercios activos para mostrar todavia.</div>
+        </div>
+        {{/each}}
+    </div>
+</div>

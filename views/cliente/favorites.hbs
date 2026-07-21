@@ -1,0 +1,22 @@
+<h2 class="mb-4">Mis favoritos</h2>
+
+<div class="row g-4">
+    {{#each favorites}}
+    <div class="col-md-6 col-xl-4">
+        <div class="card h-100 shadow-sm border-0">
+            {{#if this.comercio.foto}}
+            <img src="{{this.comercio.foto}}" class="card-img-top" alt="{{this.comercio.nombre}}" style="height: 220px; object-fit: cover;">
+            {{/if}}
+            <div class="card-body">
+                <h5>{{this.comercio.nombre}}</h5>
+                <p class="text-muted">{{this.comercio.email}}</p>
+                <a href="/cliente/menu/{{this.comercio._id}}" class="btn btn-success">Ver catalogo</a>
+            </div>
+        </div>
+    </div>
+    {{else}}
+    <div class="col-12">
+        <div class="alert alert-info">Aun no tienes comercios favoritos.</div>
+    </div>
+    {{/each}}
+</div>

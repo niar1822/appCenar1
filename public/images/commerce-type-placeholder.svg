@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 160" role="img" aria-label="Tipo de comercio">
+  <rect width="240" height="160" fill="#f4efe6"/>
+  <rect x="24" y="32" width="192" height="96" rx="18" fill="#1f2937"/>
+  <rect x="42" y="52" width="156" height="16" rx="8" fill="#f59e0b"/>
+  <rect x="42" y="78" width="90" height="12" rx="6" fill="#e5e7eb"/>
+  <rect x="42" y="98" width="120" height="12" rx="6" fill="#9ca3af"/>
+  <circle cx="184" cy="96" r="20" fill="#10b981"/>
+</svg>

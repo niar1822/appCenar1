@@ -1,0 +1,45 @@
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h2 class="mb-0">Detalle del pedido</h2>
+    <a href="/comercio/orders" class="btn btn-outline-secondary">Volver</a>
+</div>
+
+<div class="row g-4">
+    <div class="col-lg-7">
+        <div class="card shadow-sm border-0">
+            <div class="card-body">
+                <h4 class="mb-3">{{order.numeroPedido}}</h4>
+                <p class="mb-1"><strong>Cliente:</strong> {{order.cliente.nombre}} {{order.cliente.apellido}}</p>
+                <p class="mb-1"><strong>Estado:</strong> {{order.estado}}</p>
+                <p class="mb-1"><strong>Fecha:</strong> {{order.createdAt}}</p>
+                <p class="mb-3"><strong>Delivery:</strong> {{#if order.delivery}}{{order.delivery.nombre}} {{order.delivery.apellido}}{{else}}Sin asignar{{/if}}</p>
+
+                <h5 class="mb-2">Productos</h5>
+                {{#each order.productos}}
+                <div class="border rounded p-3 mb-2 d-flex justify-content-between">
+                    <div>
+                        <strong>{{this.nombre}}</strong>
+                        <div class="text-muted">Cantidad: {{this.cantidad}}</div>
+                    </div>
+                    <div>RD$ {{formatCurrency this.precio}}</div>
+                </div>
+                {{/each}}
+            </div>
+        </div>
+    </div>
+
+    <div class="col-lg-5">
+        <div class="card shadow-sm border-0">
+            <div class="card-body">
+                <h5 class="mb-3">Resumen</h5>
+                <p class="mb-1"><strong>Subtotal:</strong> RD$ {{formatCurrency order.subtotal}}</p>
+                <p class="mb-1"><strong>ITBIS:</strong> RD$ {{formatCurrency order.itbis}}</p>
+                <p class="mb-1"><strong>Total:</strong> RD$ {{formatCurrency order.total}}</p>
+                <p class="mb-3"><strong>Entrega:</strong> {{order.direccionEntrega.alias}} - {{order.direccionEntrega.direccion}}</p>
+
+                {{#if (eq order.estado "pendiente")}}
+                <a href="/comercio/orders/{{order._id}}/assign" class="btn btn-primary w-100">Asignar delivery</a>
+                {{/if}}
+            </div>
+        </div>
+    </div>
+</div>

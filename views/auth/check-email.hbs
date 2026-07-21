@@ -1,0 +1,16 @@
+<div class="row justify-content-center">
+    <div class="col-lg-5">
+        <div class="card shadow-sm border-0">
+            <div class="card-body p-4 text-center">
+                {{#if bypassEmail}}
+                <h3>Proceso completado</h3>
+                <p class="text-muted">{{success}}</p>
+                {{else}}
+                <h3>Revisa tu correo</h3>
+                <p class="text-muted">Enviamos un enlace a <strong>{{email}}</strong>.</p>
+                {{/if}}
+                <a href="/" class="btn btn-success">Volver al login</a>
+            </div>
+        </div>
+    </div>
+</div>

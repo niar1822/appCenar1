@@ -1,0 +1,30 @@
+<div class="row g-4">
+    <div class="col-12">
+        <div class="card shadow-sm border-0">
+            <div class="card-body">
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <h3 class="mb-0">Mis direcciones</h3>
+                    <a href="/cliente/addresses/new" class="btn btn-success">Nueva direccion</a>
+                </div>
+
+                {{#each addresses}}
+                <div class="border rounded p-3 mb-3">
+                    <div class="d-flex justify-content-between align-items-start">
+                        <div>
+                            <h5 class="mb-1">{{this.alias}}</h5>
+                            <p class="mb-1">{{this.direccion}}</p>
+                            <small class="text-muted">{{this.referencia}}</small>
+                        </div>
+                        <div class="d-flex gap-2">
+                            <a href="/cliente/addresses/edit/{{this._id}}" class="btn btn-sm btn-outline-primary">Editar</a>
+                            <a href="/cliente/addresses/delete/{{this._id}}" class="btn btn-sm btn-outline-danger">Eliminar</a>
+                        </div>
+                    </div>
+                </div>
+                {{else}}
+                <div class="alert alert-info mb-0">Todavia no has agregado direcciones.</div>
+                {{/each}}
+            </div>
+        </div>
+    </div>
+</div>

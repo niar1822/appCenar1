@@ -1,0 +1,58 @@
+<h2 class="mb-4">Dashboard administrador</h2>
+
+<div class="row g-4 mb-4">
+    <div class="col-md-4">
+        <div class="card shadow-sm border-0">
+            <div class="card-body">
+                <p class="text-muted mb-1">Pedidos historicos</p>
+                <h3>{{totalOrders}}</h3>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card shadow-sm border-0">
+            <div class="card-body">
+                <p class="text-muted mb-1">Pedidos de hoy</p>
+                <h3>{{todayOrders}}</h3>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card shadow-sm border-0">
+            <div class="card-body">
+                <p class="text-muted mb-1">Productos creados</p>
+                <h3>{{productsCount}}</h3>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row g-4">
+    <div class="col-md-4">
+        <div class="card shadow-sm border-0">
+            <div class="card-body">
+                <h5>Clientes</h5>
+                <p class="mb-1">Activos: {{activeClientes}}</p>
+                <p class="mb-0">Inactivos: {{inactiveClientes}}</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card shadow-sm border-0">
+            <div class="card-body">
+                <h5>Delivery</h5>
+                <p class="mb-1">Activos: {{activeDelivery}}</p>
+                <p class="mb-0">Inactivos: {{inactiveDelivery}}</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card shadow-sm border-0">
+            <div class="card-body">
+                <h5>Comercios</h5>
+                <p class="mb-1">Activos: {{activeComercios}}</p>
+                <p class="mb-0">Inactivos: {{inactiveComercios}}</p>
+            </div>
+        </div>
+    </div>
+</div>

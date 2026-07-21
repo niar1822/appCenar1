@@ -1,0 +1,26 @@
+<h2 class="mb-4">Pedidos del comercio</h2>
+
+{{#each orders}}
+<div class="card shadow-sm border-0 mb-3">
+    <div class="card-body">
+        <div class="d-flex justify-content-between align-items-start">
+            <div>
+                <h5 class="mb-1">{{this.numeroPedido}}</h5>
+                <p class="mb-1"><strong>Cliente:</strong> {{this.cliente.nombre}} {{this.cliente.apellido}}</p>
+                <p class="mb-1"><strong>Estado:</strong> {{this.estado}}</p>
+                <p class="mb-1"><strong>Total:</strong> RD$ {{formatCurrency this.total}}</p>
+                <p class="mb-0"><strong>Direccion:</strong> {{this.direccionEntrega.direccion}}</p>
+            </div>
+
+            <div class="d-flex gap-2">
+                <a href="/comercio/orders/{{this._id}}" class="btn btn-outline-dark">Ver detalle</a>
+                {{#if (eq this.estado "pendiente")}}
+                <a href="/comercio/orders/{{this._id}}/assign" class="btn btn-primary">Asignar delivery</a>
+                {{/if}}
+            </div>
+        </div>
+    </div>
+</div>
+{{else}}
+<div class="alert alert-info">No hay pedidos registrados.</div>
+{{/each}}

@@ -1,0 +1,57 @@
+<div class="row g-4">
+    <div class="col-lg-5">
+        <div class="card shadow-sm border-0">
+            <div class="card-body">
+                <h3 class="mb-3">Crear tipo de comercio</h3>
+
+                {{#if error}}
+                <div class="alert alert-danger">{{error}}</div>
+                {{/if}}
+
+                <form method="POST" action="/admin/commerce-types" enctype="multipart/form-data">
+                    <div class="mb-3">
+                        <label class="form-label">Nombre</label>
+                        <input name="nombre" class="form-control" required>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Descripcion</label>
+                        <input name="descripcion" class="form-control" required>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Icono</label>
+                        <input type="file" name="icono" class="form-control" required>
+                    </div>
+                    <button class="btn btn-success">Crear</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-lg-7">
+        <div class="card shadow-sm border-0">
+            <div class="card-body">
+                <h3 class="mb-3">Tipos registrados</h3>
+                {{#each types}}
+                <div class="border rounded p-3 mb-3">
+                    <div class="d-flex gap-3 align-items-start">
+                        {{#if this.icono}}
+                        <img src="{{this.icono}}" alt="{{this.nombre}}" width="72" height="72" class="rounded object-fit-cover">
+                        {{/if}}
+                        <div class="flex-grow-1">
+                            <h5 class="mb-1">{{this.nombre}}</h5>
+                            <p class="text-muted mb-1">{{this.descripcion}}</p>
+                            <p class="mb-2"><strong>Comercios:</strong> {{this.comerciosCount}}</p>
+                            <div class="d-flex gap-2">
+                                <a href="/admin/commerce-types/{{this._id}}/edit" class="btn btn-sm btn-outline-primary">Editar</a>
+                                <a href="/admin/commerce-types/delete/{{this._id}}" class="btn btn-sm btn-outline-danger">Eliminar</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {{else}}
+                <div class="alert alert-info mb-0">No hay tipos registrados.</div>
+                {{/each}}
+            </div>
+        </div>
+    </div>
+</div>

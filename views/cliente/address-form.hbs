@@ -1,0 +1,38 @@
+<div class="row justify-content-center">
+    <div class="col-lg-7">
+        <div class="card shadow-sm border-0">
+            <div class="card-body">
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <h2 class="mb-0">{{#if (eq mode "edit")}}Editar direccion{{else}}Nueva direccion{{/if}}</h2>
+                    <a href="/cliente/addresses" class="btn btn-outline-secondary">Volver</a>
+                </div>
+
+                {{#if error}}
+                <div class="alert alert-danger">{{error}}</div>
+                {{/if}}
+
+                <form method="POST" action="{{#if (eq mode "edit")}}/cliente/addresses/edit/{{values._id}}{{else}}/cliente/addresses{{/if}}">
+                    <div class="mb-3">
+                        <label class="form-label">Alias</label>
+                        <input name="alias" class="form-control" value="{{values.alias}}" placeholder="Casa, trabajo..." required>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Direccion</label>
+                        <textarea name="direccion" class="form-control" rows="3" required>{{values.direccion}}</textarea>
+                    </div>
+
+                    <div class="mb-4">
+                        <label class="form-label">Referencia</label>
+                        <input name="referencia" class="form-control" value="{{values.referencia}}">
+                    </div>
+
+                    <div class="d-flex gap-2">
+                        <a href="/cliente/addresses" class="btn btn-outline-secondary">Cancelar</a>
+                        <button class="btn btn-success">{{#if (eq mode "edit")}}Guardar direccion{{else}}Crear direccion{{/if}}</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

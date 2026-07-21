@@ -1,0 +1,30 @@
+<div class="row justify-content-center">
+    <div class="col-lg-8">
+        <div class="card shadow-sm border-0">
+            <div class="card-body p-4">
+                <h3 class="mb-3">{{#if (eq mode "edit")}}Editar categoria{{else}}Crear categoria{{/if}}</h3>
+
+                {{#if error}}
+                <div class="alert alert-danger">{{error}}</div>
+                {{/if}}
+
+                <form method="POST" action="{{#if (eq mode "edit")}}/comercio/categories/edit/{{values._id}}{{else}}/comercio/categories{{/if}}" class="row g-3">
+                    <div class="col-md-6">
+                        <label class="form-label">Nombre</label>
+                        <input name="nombre" class="form-control" value="{{values.nombre}}" required>
+                    </div>
+
+                    <div class="col-12">
+                        <label class="form-label">Descripcion</label>
+                        <textarea name="descripcion" class="form-control" rows="4" required>{{values.descripcion}}</textarea>
+                    </div>
+
+                    <div class="col-12 d-flex gap-2">
+                        <a href="/comercio/categories" class="btn btn-outline-secondary">Volver</a>
+                        <button class="btn btn-success">{{#if (eq mode "edit")}}Guardar cambios{{else}}Crear categoria{{/if}}</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

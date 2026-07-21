@@ -1,0 +1,30 @@
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h2 class="mb-0">Categorias</h2>
+    <a href="/comercio/categories/new" class="btn btn-success">Nueva categoria</a>
+</div>
+
+<div class="row g-4">
+    {{#each categories}}
+    <div class="col-lg-6">
+        <div class="card h-100 shadow-sm border-0">
+            <div class="card-body">
+                <div class="d-flex justify-content-between align-items-start mb-3">
+                    <div>
+                        <h5 class="mb-1">{{this.nombre}}</h5>
+                        <p class="text-muted mb-1">{{this.descripcion}}</p>
+                        <p class="mb-0"><strong>Productos:</strong> {{this.productsCount}}</p>
+                    </div>
+                    <div class="d-flex gap-2">
+                        <a href="/comercio/categories/edit/{{this._id}}" class="btn btn-sm btn-outline-primary">Editar</a>
+                        <a href="/comercio/categories/delete/{{this._id}}" class="btn btn-sm btn-outline-danger">Eliminar</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {{else}}
+    <div class="col-12">
+        <div class="alert alert-info mb-0">Aun no tienes categorias.</div>
+    </div>
+    {{/each}}
+</div>

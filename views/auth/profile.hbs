@@ -1,0 +1,69 @@
+<div class="row">
+    <div class="col-lg-8">
+        <div class="card shadow-sm border-0">
+            <div class="card-body p-4">
+                <h3 class="mb-3">Mi perfil</h3>
+
+                <form method="POST" action="/profile" enctype="multipart/form-data" class="row g-3">
+                    <div class="col-md-6">
+                        <label class="form-label">Nombre</label>
+                        <input name="nombre" class="form-control" value="{{user.nombre}}" required>
+                    </div>
+
+                    {{#if (ne user.role "comercio")}}
+                    <div class="col-md-6">
+                        <label class="form-label">Apellido</label>
+                        <input name="apellido" class="form-control" value="{{user.apellido}}">
+                    </div>
+                    {{/if}}
+
+                    <div class="col-md-6">
+                        <label class="form-label">Telefono</label>
+                        <input name="telefono" class="form-control" value="{{user.telefono}}" required>
+                    </div>
+
+                    <div class="col-md-6">
+                        <label class="form-label">Correo</label>
+                        <input class="form-control" value="{{user.email}}" disabled>
+                    </div>
+
+                    <div class="col-md-6">
+                        <label class="form-label">Foto o logo</label>
+                        <input type="file" name="foto" class="form-control">
+                    </div>
+
+                    {{#if user.foto}}
+                    <div class="col-md-6">
+                        <img src="{{user.foto}}" alt="perfil" class="img-fluid rounded border" style="max-height: 160px;">
+                    </div>
+                    {{/if}}
+
+                    {{#if (eq user.role "comercio")}}
+                    <div class="col-md-4">
+                        <label class="form-label">Hora de apertura</label>
+                        <input type="time" name="horarioApertura" class="form-control" value="{{user.horarioApertura}}">
+                    </div>
+
+                    <div class="col-md-4">
+                        <label class="form-label">Hora de cierre</label>
+                        <input type="time" name="horarioCierre" class="form-control" value="{{user.horarioCierre}}">
+                    </div>
+
+                    <div class="col-md-4">
+                        <label class="form-label">Tipo de comercio</label>
+                        <select name="tipoComercio" class="form-select">
+                            {{#each tiposComercio}}
+                            <option value="{{this._id}}" {{#if (eq ../user.tipoComercio._id this._id)}}selected{{/if}}>{{this.nombre}}</option>
+                            {{/each}}
+                        </select>
+                    </div>
+                    {{/if}}
+
+                    <div class="col-12">
+                        <button class="btn btn-success">Guardar perfil</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,42 @@
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h2 class="mb-0">Asignar delivery</h2>
+    <a href="/comercio/orders/{{order._id}}" class="btn btn-outline-secondary">Volver</a>
+</div>
+
+<div class="row g-4">
+    <div class="col-lg-5">
+        <div class="card shadow-sm border-0">
+            <div class="card-body">
+                <h5 class="mb-3">{{order.numeroPedido}}</h5>
+                <p class="mb-1"><strong>Cliente:</strong> {{order.cliente.nombre}} {{order.cliente.apellido}}</p>
+                <p class="mb-1"><strong>Estado:</strong> {{order.estado}}</p>
+                <p class="mb-0"><strong>Total:</strong> RD$ {{formatCurrency order.total}}</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-lg-7">
+        <div class="card shadow-sm border-0">
+            <div class="card-body">
+                <h5 class="mb-3">Delivery disponibles</h5>
+
+                {{#if deliveries.length}}
+                <form method="POST" action="/comercio/orders/{{order._id}}/assign">
+                    <div class="mb-3">
+                        <label class="form-label">Selecciona un delivery</label>
+                        <select name="deliveryId" class="form-select" required>
+                            <option value="">Selecciona uno</option>
+                            {{#each deliveries}}
+                            <option value="{{this._id}}">{{this.nombre}} {{this.apellido}} - {{this.email}}</option>
+                            {{/each}}
+                        </select>
+                    </div>
+                    <button class="btn btn-success">Asignar pedido</button>
+                </form>
+                {{else}}
+                <div class="alert alert-info mb-0">No hay delivery disponibles en este momento.</div>
+                {{/if}}
+            </div>
+        </div>
+    </div>
+</div>

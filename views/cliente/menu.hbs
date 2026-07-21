@@ -1,0 +1,74 @@
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <div>
+        <h2 class="mb-1">{{comercio.nombre}}</h2>
+        <p class="text-muted mb-0">{{comercio.tipoComercio.nombre}}</p>
+    </div>
+    <a href="/cliente/comercios/{{comercio.tipoComercio._id}}" class="btn btn-outline-secondary">Volver</a>
+</div>
+
+<div class="row g-4">
+    <div class="col-lg-8">
+        {{#each categorias}}
+        <div class="mb-4">
+            <h4 class="mb-3">{{this.nombre}}</h4>
+            <div class="row g-3">
+                {{#each this.productos}}
+                <div class="col-md-6">
+                    <div class="card h-100 shadow-sm border-0">
+                        {{#if this.imagen}}
+                        <img src="{{this.imagen}}" class="card-img-top" alt="{{this.nombre}}" style="height: 200px; object-fit: cover;">
+                        {{/if}}
+                        <div class="card-body">
+                            <h5 class="card-title">{{this.nombre}}</h5>
+                            <p class="card-text text-muted">{{this.descripcion}}</p>
+                            <p class="fw-semibold">RD$ {{formatCurrency this.precio}}</p>
+
+                            {{#if this.selected}}
+                            <button class="btn btn-outline-secondary w-100" disabled>Ya agregado</button>
+                            {{else}}
+                            <form method="POST" action="/cliente/cart/add/{{this._id}}">
+                                <button class="btn btn-success w-100">Agregar al pedido</button>
+                            </form>
+                            {{/if}}
+                        </div>
+                    </div>
+                </div>
+                {{/each}}
+            </div>
+        </div>
+        {{else}}
+        <div class="alert alert-info">Este comercio aun no tiene productos.</div>
+        {{/each}}
+    </div>
+
+    <div class="col-lg-4">
+        <div class="card shadow-sm border-0 sticky-top" style="top: 1rem;">
+            <div class="card-body">
+                <h4 class="mb-3">Mi pedido</h4>
+
+                {{#each pedidoActual}}
+                <div class="d-flex justify-content-between align-items-center border-bottom py-2">
+                    <div>
+                        <div class="fw-semibold">{{this.nombre}}</div>
+                        <small class="text-muted">RD$ {{formatCurrency this.precio}}</small>
+                    </div>
+                    <form method="POST" action="/cliente/cart/remove/{{../comercio._id}}/{{this.productoId}}">
+                        <button class="btn btn-sm btn-outline-danger">Quitar</button>
+                    </form>
+                </div>
+                {{else}}
+                <p class="text-muted mb-0">Aun no has agregado productos.</p>
+                {{/each}}
+
+                <div class="d-flex justify-content-between mt-3">
+                    <span>Subtotal</span>
+                    <strong>RD$ {{formatCurrency subtotal}}</strong>
+                </div>
+
+                <a href="/cliente/checkout/{{comercio._id}}" class="btn btn-dark w-100 mt-3 {{#if pedidoActual.length}}{{else}}disabled{{/if}}">
+                    Continuar
+                </a>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,20 @@
+<div class="row justify-content-center">
+    <div class="col-lg-7">
+        <div class="card shadow-sm border-0">
+            <div class="card-body p-4">
+                <h3 class="mb-3">Eliminar producto</h3>
+                <p class="mb-2">Estas seguro que deseas eliminar este producto?</p>
+                <p class="mb-1"><strong>Nombre:</strong> {{product.nombre}}</p>
+                <p class="mb-1"><strong>Categoria:</strong> {{product.categoria.nombre}}</p>
+                <p class="mb-3"><strong>Precio:</strong> RD$ {{formatCurrency product.precio}}</p>
+
+                <div class="d-flex gap-2">
+                    <a href="/comercio/products" class="btn btn-outline-secondary">Cancelar</a>
+                    <form method="POST" action="/comercio/products/delete/{{product._id}}">
+                        <button class="btn btn-danger">Aceptar</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

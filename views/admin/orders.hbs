@@ -1,0 +1,21 @@
+<h3>Pedidos 📦</h3>
+
+{{#each orders}}
+<div class="card p-3 mb-2">
+
+    <p><b>Cliente:</b> {{this.cliente.nombre}}</p>
+    <p><b>Total:</b> ${{this.total}}</p>
+    <p><b>Estado:</b> {{this.estado}}</p>
+
+    {{#if this.delivery}}
+    <p><b>Delivery:</b> {{this.delivery.nombre}}</p>
+    {{else}}
+    <p class="text-danger">Sin asignar</p>
+    {{/if}}
+
+</div>
+{{/each}}
+
+<a href="/admin" class="btn btn-primary">
+    📊 Ir al panel de control
+</a>

@@ -1,0 +1,18 @@
+<div class="row justify-content-center">
+    <div class="col-lg-6">
+        <div class="card shadow-sm border-0">
+            <div class="card-body text-center">
+                <h2 class="mb-3">Eliminar direccion</h2>
+                <p class="mb-2">Estas seguro que deseas eliminar esta direccion?</p>
+                <p class="text-muted mb-4">{{address.alias}} - {{address.direccion}}</p>
+
+                <div class="d-flex justify-content-center gap-2">
+                    <a href="/cliente/addresses" class="btn btn-outline-secondary">Cancelar</a>
+                    <form method="POST" action="/cliente/addresses/delete/{{address._id}}">
+                        <button class="btn btn-danger">Aceptar</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

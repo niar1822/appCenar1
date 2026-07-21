@@ -1,0 +1,43 @@
+<h2 class="mb-4">Panel de delivery</h2>
+
+<div class="row g-4 mb-4">
+    <div class="col-md-6">
+        <div class="card shadow-sm border-0">
+            <div class="card-body">
+                <p class="text-muted mb-1">Estado actual</p>
+                <h3>{{#if hasActiveOrder}}Ocupado{{else}}Disponible{{/if}}</h3>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="card shadow-sm border-0">
+            <div class="card-body">
+                <p class="text-muted mb-1">Pedidos completados</p>
+                <h3>{{completedOrders}}</h3>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="d-flex gap-2 mb-4">
+    <a href="/delivery/myOrders" class="btn btn-outline-dark">Ver todos mis pedidos</a>
+</div>
+
+<h3 class="mb-3">Pedidos asignados</h3>
+
+{{#each orders}}
+<div class="card shadow-sm border-0 mb-3">
+    <div class="card-body d-flex justify-content-between align-items-start">
+        <div>
+            <h5 class="mb-1">{{this.comercio.nombre}}</h5>
+            <p class="mb-1"><strong>Pedido:</strong> {{this.numeroPedido}}</p>
+            <p class="mb-1"><strong>Estado:</strong> {{this.estado}}</p>
+            <p class="mb-1"><strong>Total:</strong> RD$ {{formatCurrency this.total}}</p>
+            <p class="mb-0"><strong>Productos:</strong> {{this.productosCount}}</p>
+        </div>
+        <a href="/delivery/orders/{{this._id}}" class="btn btn-outline-primary">Ver detalle</a>
+    </div>
+</div>
+{{else}}
+<div class="alert alert-info">Aun no tienes pedidos asignados.</div>
+{{/each}}
