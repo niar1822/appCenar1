@@ -1,19 +1,13 @@
 import multer from "multer";
-import fs from "fs";
-import path from "path";
+import { CloudinaryStorage } from "multer-storage-cloudinary";
+import cloudinary from "../config/cloudinary.js";
 
-const uploadsDir = path.join("public", "uploads");
-
-if (!fs.existsSync(uploadsDir)) {
-    fs.mkdirSync(uploadsDir, { recursive: true });
-}
-
-const storage = multer.diskStorage({
-    destination: uploadsDir,
-    filename: (req, file, cb) => {
-        const ext = path.extname(file.originalname);
-        cb(null, Date.now() + ext);
-    }
+const storage = new CloudinaryStorage({
+  cloudinary,
+  params: {
+    folder: "cenar-app",
+    allowed_formats: ["jpg", "jpeg", "png", "webp"],
+  },
 });
 
 export const upload = multer({ storage });
