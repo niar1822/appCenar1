@@ -8,7 +8,7 @@
     "dev": "cross-env APP_ENV=development nodemon app.js",
     "qa": "cross-env APP_ENV=qa nodemon app.js",
     "prod": "cross-env APP_ENV=production node app.js",
-    "test:selenium": "node --test tests/selenium/login.e2e.mjs"
+    "test:selenium": "node --test tests/selenium/login.e2e.mjs tests/selenium/release1.e2e.mjs"
   },
   "keywords": [],
   "author": "",

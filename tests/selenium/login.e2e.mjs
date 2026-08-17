@@ -1,5 +1,6 @@
 import assert from 'node:assert/strict';
 import { mkdir, writeFile } from 'node:fs/promises';
+import { existsSync } from 'node:fs';
 import path from 'node:path';
 import test from 'node:test';
 import { Builder, By, until } from 'selenium-webdriver';
@@ -10,11 +11,15 @@ const TEST_USERNAME = process.env.TEST_USERNAME;
 const TEST_PASSWORD = process.env.TEST_PASSWORD;
 const TEST_SUCCESS_PATH = process.env.TEST_SUCCESS_PATH;
 const HEADLESS = process.env.HEADLESS !== 'false';
+const CHROMEDRIVER_PATH = process.env.CHROMEDRIVER_PATH;
 const TIMEOUT = Number(process.env.SELENIUM_TIMEOUT ?? 10000);
 const RESULTS_DIR = path.resolve('test-results', 'selenium');
 
 if (!BASE_URL) {
   throw new Error('Define BASE_URL antes de ejecutar. Ejemplo: $env:BASE_URL="https://tu-app.com"');
+}
+if (CHROMEDRIVER_PATH && !existsSync(CHROMEDRIVER_PATH)) {
+  throw new Error(`CHROMEDRIVER_PATH no existe: ${CHROMEDRIVER_PATH}. Elimina la variable para usar Selenium Manager o indica la ruta real de chromedriver.exe.`);
 }
 
 let driver;
@@ -50,7 +55,9 @@ test.before(async () => {
   const options = new chrome.Options();
   if (HEADLESS) options.addArguments('--headless=new', '--window-size=1440,1000');
   options.addArguments('--disable-gpu', '--no-sandbox');
-  driver = await new Builder().forBrowser('chrome').setChromeOptions(options).build();
+  const builder = new Builder().forBrowser('chrome').setChromeOptions(options);
+  if (CHROMEDRIVER_PATH) builder.setChromeService(new chrome.ServiceBuilder(CHROMEDRIVER_PATH));
+  driver = await builder.build();
   await driver.manage().setTimeouts({ implicit: 0, pageLoad: TIMEOUT, script: TIMEOUT });
 });
 
